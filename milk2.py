@@ -23,28 +23,20 @@ for i in range(3, len(words) - 1, 2):
             starts.append(words[i])
             ends.append(words[i + 1])
 
-print(starts)
-print(ends)
-
-removes = []
-removee = []
-for i in range(len(starts)):
-    for j in range(i + 1, len(starts)):
+i = 0
+while True:
+    if i >= len(starts):
+        break
+    j = i + 1
+    while True:
+        if j >= len(starts):
+            break
         if ends[i] >= starts[j]:
-            print('removing', min(ends[i], ends[j]),starts[j])
-            print('i,j', i,j)
-            removee.append(min(ends[i], ends[j]))
-            removes.append(starts[j])
-
-print(removes)
-print(removee)
-
-for i in range(len(removes)):
-    starts.remove(removes[i])
-    ends.remove(removee[i])
-
-print(starts)
-print(ends)
+            ends.remove(min(ends[i], ends[j]))
+            starts.remove(starts[j])
+        else:
+            j += 1
+    i += 1
 
 maxidle = 0
 maxcontinuous = 0
@@ -59,5 +51,3 @@ for i in range(len(starts)):
 fout.write(str(maxcontinuous) + ' ' + str(maxidle) + '\n')
 
 fout.close()
-
-#912 184
